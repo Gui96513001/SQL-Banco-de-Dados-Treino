@@ -1,0 +1,63 @@
+CRIAR TABELA Cliente (
+    chave primária codigo INT,
+    nome VARCHAR (50) NÃO NULO,
+    estado VARCHAR (2) NÃO NULO,
+    e-mail VARCHAR (30) NOT NULL,
+    data_nascimento DATE NOT NULL
+);
+
+CRIAR TABELA Endereco (
+    CEP VARCHAR (8) NÃO NULO,
+    logradouro VARCHAR (40) NÃO NULO,
+    numero VARCHAR (5) NÃO NULO,
+    codigo_cliente INT UNIQUE,
+    FOREIGN KEY (codigo_cliente) REFERÊNCIAS Cliente (codigo)
+);
+
+CRIAR TABELA Pedido (
+    codigo INT PRIMARY KEY,
+    data DATE NOT NULL,
+    FLOAT NOT NULL total,
+    codigo_cliente INT,
+    FOREIGN KEY (codigo_cliente) REFERÊNCIAS Cliente (codigo)
+);
+
+CRIAR TABELA Produto (
+    codigo INT PRIMARY KEY,
+    descricao VARCHAR (20) NÃO NULO,
+    preco_unitario FLOAT NOT NULLBH
+);
+
+CRIAR TABELA ItemPedido (
+    codPed INT NOT NULL,
+    codProd INT NOT NULL,
+    quantidade INT NÃO NULO,
+    subtotal FLOAT NOT NULL,
+    PRIMARY KEY (codPed, codProd),
+    FOREIGN KEY (codPed) REFERÊNCIAS Pedido (codigo),
+    FOREIGN KEY (codProd) REFERÊNCIAS Produto (codigo)
+);
+
+/ * DADOS DOS CLIENTES * /
+INSERT INTO Cliente (codigo, nome, estado, email, data_nascimento) VALORES (1, 'Lucas', 'BR', ' Lucas@hotmail.com. ', TO_DATE ('29/ 10/1992 ',' DD / MM / AAAA '));
+INSERT INTO Cliente (codigo, nome, estado, email, data_nascimento) VALORES (2, 'Isabela', 'RS', ' Isabela@hotmail.com. ', TO_DATE ('20 / 09/1998 ',' DD / MM / AAAA '));
+INSERT INTO Cliente (codigo, nome, estado, email, data_nascimento) VALORES (3, 'Daniel', 'MG', ' Daniel@gmail.com.br ', TO_DATE ('06 / 04/1990 ',' DD / MM / AAAA '));
+INSERT INTO Cliente (codigo, nome, estado, email, data_nascimento) VALORES (4, 'Larissa', 'BH', ' Larissa@gmail.com.br ', TO_DATE ('16 / 02/1987 ',' DD / MM / AAAA '));
+
+/ * ENDEREÇO ​​DE CADA CLIENTE * /
+INSERIR NA Endereco (CEP, logradouro, numero, codigo_cliente) VALORES ('35416262', 'Rua Berts', '145', 1);
+INSERIR NA Endereco (CEP, logradouro, numero, codigo_cliente) VALORES ('53427363', 'Rua Mirai', '234', 2);
+INSERIR NA Endereco (CEP, logradouro, numero, codigo_cliente) VALORES ('23368907', 'Av Lombardo', '1380', 3);
+INSERIR NA Endereco (CEP, logradouro, numero, codigo_cliente) VALORES ('45379379','Rua Taiga; '100', 4);
+
+/ * PEDIDO * /
+INSERT INTO Pedido (codigo, data, total, codigo_cliente) VALORES (1, TO_DATE ('01 / 06/2020 ',' DD / MM / AAAA '), 240.80);
+INSERT INTO Pedido (codigo, data, total, codigo_cliente) VALORES (2, TO_DATE ('07 / 08/2020 ',' DD / MM / AAAA '), 366.55);
+INSERT INTO Pedido (codigo, data, total, codigo_cliente) VALORES (3, TO_DATE ('10 / 10/2020 ',' DD / MM / AAAA '), 277.00);
+INSERT INTO Pedido (codigo, data, total, codigo_cliente) VALORES (4, TO_DATE ('17 / 12/2020 ',' DD / MM / AAAA '), 575.10);
+
+CRIAR TABELA CARROS (
+    chave primária codigo INT,
+    nome VARCHAR (50) NÃO NULO, 
+modelo Varchar (50) NOT NULL
+);
